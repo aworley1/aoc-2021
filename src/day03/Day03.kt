@@ -44,6 +44,6 @@ fun main() {
     val input = readInput("day03/Day03")
     println(part1(input))
 
-    check(part2(testInput) == 900)
+    check(part2(testInput) == 230)
     println(part2(input))
 }
