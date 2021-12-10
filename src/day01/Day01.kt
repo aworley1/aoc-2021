@@ -1,3 +1,7 @@
+package day01
+
+import readInput
+
 fun main() {
     fun part1(input: List<String>): Int {
         return input.windowed(2)
@@ -16,12 +20,12 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
+    val testInput = readInput("day01/Day01_test")
     val part1TestOutput = part1(testInput)
     println(part1TestOutput)
     check(part1TestOutput == 7)
 
-    val input = readInput("Day01")
+    val input = readInput("day01/Day01")
     println(part1(input))
 
     check(part2(testInput) == 5)
