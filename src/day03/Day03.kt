@@ -4,7 +4,7 @@ import readInput
 
 fun main() {
     fun findGamma(input: List<String>) =
-        (0..(input[0].length - 1)).map { index ->
+        (0 until input[0].length).map { index ->
             input
                 .map {
                     it[index]
@@ -16,7 +16,7 @@ fun main() {
             .let { Integer.parseInt(it, 2) }
 
     fun findEpsilon(input: List<String>) =
-        (0..(input[0].length - 1)).map { index ->
+        (0 until input[0].length).map { index ->
             input
                 .map {
                     it[index]
