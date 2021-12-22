@@ -1,18 +1,18 @@
 package day05
 
-import day04.Card
-import day04.parseGame
 import readInput
 
 fun main() {
     fun part1(input: List<String>): Int {
         val grid = Grid.parse(input)
-        val allPoints = grid.allPoints()
+        val allPoints = grid.allPointsExcDiag()
         return allPoints.groupBy { it }.filter { it.value.size > 1 }.size
     }
 
     fun part2(input: List<String>): Int {
-        return 0
+        val grid = Grid.parse(input)
+        val allPoints = grid.allPoints()
+        return allPoints.groupBy { it }.filter { it.value.size > 1 }.size
     }
 
     // test if implementation meets criteria from the description, like:
@@ -24,6 +24,6 @@ fun main() {
     val input = readInput("main/kotlin/day05/Day05")
     println(part1(input))
 
-    check(part2(testInput) == 1924)
+    check(part2(testInput) == 12)
     println(part2(input))
 }
