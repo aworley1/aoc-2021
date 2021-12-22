@@ -50,29 +50,21 @@ data class Line(val start: Coord, val end: Coord) {
     }
 
     private fun findDiagPoints(): List<Coord> {
-        if (end.x > start.x && end.y > start.y) {
-            return (start.x until end.x + 1).mapIndexed { index, _ ->
-                Coord(start.x + index, start.y + index)
+        val startCoord = listOf(start, end).minByOrNull { it.x }!!
+        val endCoord = listOf(start, end).maxByOrNull { it.x }!!
+
+        if (startCoord.y < endCoord.y) {
+            return (startCoord.x until endCoord.x + 1).mapIndexed { index, _ ->
+                Coord(startCoord.x + index, startCoord.y + index)
             }
         }
 
-        if (start.x > end.x && start.y > end.y) {
-            return (end.x until start.x + 1).mapIndexed { index, _ ->
-                Coord(start.x - index, start.y - index)
+        if (startCoord.y > endCoord.y) {
+            return (startCoord.x until endCoord.x + 1).mapIndexed { index, _ ->
+                Coord(startCoord.x + index, startCoord.y - index)
             }
         }
 
-        if (start.x > end.x && start.y < end.y) {
-            return (end.x until start.x + 1).mapIndexed { index, _ ->
-                Coord(start.x - index, start.y + index)
-            }
-        }
-
-        if (start.x < end.x && start.y > end.y) {
-            return (start.x until end.x + 1).mapIndexed { index, _ ->
-                Coord(start.x + index, start.y - index)
-            }
-        }
         return emptyList()
     }
 }
