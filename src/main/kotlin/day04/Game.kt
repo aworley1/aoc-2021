@@ -53,6 +53,8 @@ data class Card(val squares: Map<Coord, Square>) {
         return colCoords.any { column -> column.all { squares[it]!!.marked } } ||
                 rowCoords.any { row -> row.all { squares[it]!!.marked } }
     }
+
+    fun score(number: Int) = squares.values.filterNot { it.marked }.sumOf { it.number } * number
 }
 
 data class Square(
