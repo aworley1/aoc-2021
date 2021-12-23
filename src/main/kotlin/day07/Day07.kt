@@ -4,8 +4,10 @@ import readInput
 import kotlin.math.abs
 
 fun main() {
+    fun getCrabs(input: List<String>) = input.single().split(",").map { it.toInt() }
+
     fun part1(input: List<String>): Long {
-        val crabs = input.single().split(",").map { it.toInt() }
+        val crabs = getCrabs(input)
 
         return crabs.mapIndexed { index, element ->
             val otherCrabs = crabs.slice(0 until index) + crabs.slice(index + 1 until crabs.size)
@@ -14,7 +16,12 @@ fun main() {
     }
 
     fun part2(input: List<String>): Long {
-        return 0
+        val crabs = getCrabs(input)
+
+        return crabs.mapIndexed { index, element ->
+            val otherCrabs = crabs.slice(0 until index) + crabs.slice(index + 1 until crabs.size)
+            otherCrabs.sumOf { calculateFuel( abs(it - element).toLong()) }
+        }.also { println(it) }.minOf { it }.toLong()
     }
 
     // test if implementation meets criteria from the description, like:
@@ -28,6 +35,10 @@ fun main() {
 
     val part2TestOutput = part2(testInput)
     println("Part 2 Test: $part2TestOutput")
-    check(part2TestOutput == 0L)
+    check(part2TestOutput == 170L)
     println(part2(input))
+}
+
+private fun calculateFuel(move: Long): Long {
+    return (1..move).sumOf { it }
 }
